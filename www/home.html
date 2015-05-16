@@ -4,5 +4,8 @@
             {{ current_user }}
         </p>
         <a href="/logout">Log out</a>
+        {% if "admin" in user_profiles %}
+            <a href="/workers">Workers</a>
+        {% end %}
     </body>
 </html>
