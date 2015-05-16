@@ -1,12 +1,19 @@
 {% extends base.html %}
 {% block page %}
     <form action="/register_worker" method="post">
-        Username: <input type="text" name="username">
-        Complete name: <input type="text" name="complete_name">
-        Profiles:
-        <input type="checkbox" name="profiles" value="admin">admin
-        <input type="checkbox" name="profiles" value="seller">seller
-        <input type="checkbox" name="profiles" value="register">register
-        <input type="submit" value="Register">
+        <fieldset>
+            <legend>Register worker</legend>
+            <label for="username">Username:</label>
+            <input type="text" name="username">
+            <label for="complete_name">Complete name:</label>
+            <input type="text" name="complete_name">
+            <label for="profiles">Profiles:</label>
+            <div class="checkboxes">
+                <input type="checkbox" name="profiles" value="admin" id="profile_admin"><label for="profile_admin">admin</label>
+                <input type="checkbox" name="profiles" value="seller" id="profile_seller"><label for="profile_seller">seller</label>
+                <input type="checkbox" name="profiles" value="register" id="profile_register"><label for="profile_register">register</label>
+            </div>
+            <input type="submit" value="Register">
+        </fieldset>
     </form>
 {% end %}

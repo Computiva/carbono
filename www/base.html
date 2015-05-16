@@ -1,12 +1,20 @@
 <html>
+    <head>
+        <title>Carbono</title>
+        <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script type="text/javascript" src="/base.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/black-tie/jquery-ui.css" />
+        <link rel="stylesheet" href="/base.css" />
+    </head>
     <body>
         <div id="user_bar">
-            <a href="/">Home</a>
+            <a href="/" id="home">Home</a>
             {% if current_user %}
                 <p>
                     {{ current_user }}
                 </p>
-                <a href="/logout">Log out</a>
+                <a href="/logout" class="button">Log out</a>
             {% end %}
         </div>
         <div id="page">

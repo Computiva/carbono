@@ -2,7 +2,7 @@ from random import getrandbits
 from md5 import md5
 import re
 
-from tornado.web import Application, authenticated, RequestHandler
+from tornado.web import Application, authenticated, RequestHandler, StaticFileHandler
 from tornado.ioloop import IOLoop
 from redis import Redis
 
@@ -110,6 +110,8 @@ application = Application([
     (r"/workers", WorkersHandler),
     (r"/register_worker", RegisterWorkerHandler),
     (r"/remove_worker", RemoveWorkerHandler),
+    (r"/(.*\.css)", StaticFileHandler, {"path": "./www/styles"}),
+    (r"/(.*\.js)", StaticFileHandler, {"path": "./www/scripts"}),
 ], **settings)
 database = Redis()
 

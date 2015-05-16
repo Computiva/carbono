@@ -14,8 +14,8 @@ class LoginTestCase(AsyncHTTPTestCase):
 
     def test_login_form(self):
         response = self.fetch("/login")
-        self.assertIn("Username: ", response.body)
-        self.assertIn("Password: ", response.body)
+        self.assertIn("Username:", response.body)
+        self.assertIn("Password:", response.body)
 
     def test_login_action(self):
         headers = {"Cookie": "username=%s" % self._secure_cookie("username", "test user")}

@@ -49,8 +49,8 @@ class AdminTestCase(AsyncHTTPTestCase):
     def test_authorize_admin_to_register_worker(self):
         headers = {"Cookie": "username=%s" % self._secure_cookie("username", "test_admin")}
         response = self.fetch("/register_worker", headers=headers)
-        self.assertIn("Username: ", response.body)
-        self.assertIn("Complete name: ", response.body)
+        self.assertIn("Username:", response.body)
+        self.assertIn("Complete name:", response.body)
         self.assertIn("Profiles:", response.body)
         self.assertIn("admin", response.body)
         self.assertIn("seller", response.body)
