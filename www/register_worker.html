@@ -1,13 +1,12 @@
-<html>
-    <body>
-        <form action="/register_worker" method="post">
-            Username: <input type="text" name="username">
-            Complete name: <input type="text" name="complete_name">
-            Profiles:
-            <input type="checkbox" name="profiles" value="admin">admin
-            <input type="checkbox" name="profiles" value="seller">seller
-            <input type="checkbox" name="profiles" value="register">register
-            <input type="submit" value="Register">
-        </form>
-    </body>
-</html>
+{% extends base.html %}
+{% block page %}
+    <form action="/register_worker" method="post">
+        Username: <input type="text" name="username">
+        Complete name: <input type="text" name="complete_name">
+        Profiles:
+        <input type="checkbox" name="profiles" value="admin">admin
+        <input type="checkbox" name="profiles" value="seller">seller
+        <input type="checkbox" name="profiles" value="register">register
+        <input type="submit" value="Register">
+    </form>
+{% end %}

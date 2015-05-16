@@ -1,9 +1,8 @@
-<html>
-    <body>
-        <form action="/login" method="post">
-            Username: <input type="text" name="username">
-            Password: <input type="password" name="password">
-            <input type="submit" value="Sign in">
-        </form>
-    </body>
-</html>
+{% extends base.html %}
+{% block page %}
+    <form action="/login" method="post">
+        Username: <input type="text" name="username">
+        Password: <input type="password" name="password">
+        <input type="submit" value="Sign in">
+    </form>
+{% end %}

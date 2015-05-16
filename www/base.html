@@ -1,0 +1,17 @@
+<html>
+    <body>
+        <div id="user_bar">
+            <a href="/">Home</a>
+            {% if current_user %}
+                <p>
+                    {{ current_user }}
+                </p>
+                <a href="/logout">Log out</a>
+            {% end %}
+        </div>
+        <div id="page">
+            {% block page %}
+            {% end %}
+        </div>
+    </body>
+</html>
