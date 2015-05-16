@@ -23,7 +23,7 @@ Carbono
 
 	0. Run the server.
 
-		> # python server.py
+		> $ python server.py
 
 	0. Then load application from your web browser with address:
 
