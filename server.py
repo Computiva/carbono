@@ -94,7 +94,8 @@ class RemoveWorkerHandler(BaseHandler):
             self.redirect("/")
             return
         username = self.get_argument("username")
-        database.delete("user:%s:profiles" % username)
+        for key in database.keys("user:%s:*" % username):
+            database.delete(key)
         self.redirect("/workers")
 
 

@@ -6,5 +6,12 @@ $(document).ready(function() {
         },
         text: false,
     });
+    $("a.remove").button({
+        icons: {
+            primary: "ui-icon-trash",
+        },
+        text: false,
+    });
+    $("span.list_item").buttonset();
     $("div.checkboxes").buttonset();
 });

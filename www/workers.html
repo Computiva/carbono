@@ -1,9 +1,10 @@
 {% extends base.html %}
 {% block page %}
     <a href="/register_worker" class="button">Add worker</a>
-    <ul>
-        {% for user in users %}
-            <li>{{ user }}
-        {% end %}
-    </ul>
+    {% for user in users %}
+        <span class="list_item">
+            <a href="/workers">{{ user }}</a>
+            <a href="/remove_worker?username={{ user }}" class="remove">Remove worker</a>
+        </span>
+    {% end %}
 {% end %}
