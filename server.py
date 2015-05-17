@@ -77,10 +77,9 @@ class RegisterWorkerHandler(BaseHandler):
             return
         username = self.get_argument("username")
         complete_name = self.get_argument("complete_name")
-        profiles = self.get_argument("profiles")
         database.set("user:%s:password" % username, md5(username).hexdigest())
         database.set("user:%s:complete_name" % username, complete_name)
-        for profile in profiles:
+        for profile in self.request.arguments["profiles"]:
             database.rpush("user:%s:profiles" % username, profile)
         self.redirect("/workers")
 
