@@ -3,3 +3,11 @@ form fieldset input[type="text"],
 form fieldset input[type="password"] {
     display: block;
 }
+
+div#user_bar {
+    padding: 4px;
+}
+
+div#user_bar * {
+    display: inline-block;
+}
