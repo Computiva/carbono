@@ -53,8 +53,9 @@ class WorkersHandler(BaseHandler):
             return
         users = list()
         for key in database.keys("*"):
-            match = re.search("user:([^:]+):.*", key)
-            users.append(match.groups()[0])
+            username = re.search("user:([^:]+):.*", key).groups()[0]
+            if username not in users:
+                users.append(username)
         self.render("workers.html", users=users)
 
 
