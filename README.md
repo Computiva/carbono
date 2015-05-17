@@ -9,7 +9,7 @@ Carbono
 
 	0. Install the redis database dependency.
 
-		>  # apt-get install redis
+		>  # apt-get install redis-server
 	
 	0. If you don't have pip (python package manager), we recommend to install it.
 
