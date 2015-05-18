@@ -19,4 +19,5 @@ span.list_item {
 
 span.list_item a:first-child {
     width: 200px;
+    text-align: left;
 }

@@ -1,6 +1,8 @@
 {% extends base.html %}
 {% block page %}
     {% if "admin" in user_profiles %}
-        <a href="/workers">Workers</a>
+        <a href="/workers">
+            <i class="fa fa-users"> Workers</i>
+        </a>
     {% end %}
 {% end %}
