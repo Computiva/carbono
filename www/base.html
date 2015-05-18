@@ -17,6 +17,11 @@
                 <a href="/logout" class="button">Log out</a>
             {% end %}
         </div>
+        {% if "error_message" in globals().keys() %}
+            <div id="error_box" class="ui-state-error">
+                {{ error_message }}
+            </div>
+        {% end %}
         <div id="page">
             {% block page %}
             {% end %}

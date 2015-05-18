@@ -33,7 +33,7 @@ class LoginHandler(BaseHandler):
             self.set_secure_cookie("username", username)
             self.redirect("/")
             return
-        self.write("Wrong login or password! <a href=\"/login\">back</a>")
+        self.render("login.html", error_message="Wrong login or password!")
 
 
 class LogoutHandler(BaseHandler):
