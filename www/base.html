@@ -14,9 +14,12 @@
                 <i class="fa fa-home fa-2x"></i>
             </a>
             {% if current_user %}
-                <p>
-                    {{ current_user }}
-                </p>
+                <a href="/manage_account">
+                    <i class="fa fa-cog fa-2x"></i>
+                </a>
+                <span>
+                    <i class="fa fa-user fa-2x"> {{ current_user }}</i>
+                </span>
                 <a href="/logout">
                     <i class="fa fa-sign-out fa-2x"></i>
                 </a>

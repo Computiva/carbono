@@ -1,6 +1,4 @@
-form fieldset label,
-form fieldset input[type="text"],
-form fieldset input[type="password"] {
+form fieldset * {
     display: block;
 }
 

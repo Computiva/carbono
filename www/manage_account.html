@@ -1,0 +1,59 @@
+{% extends base.html %}
+{% block page %}
+    <form action="/manage_account" method="post">
+        <fieldset>
+            <legend>Manage account</legend>
+            <label for="username">Username:</label>
+            <span>{{ current_user }}</span>
+            <label for="password">Password:</label>
+            <input type="password" name="password">
+            <label for="confirm_password">Confirm password:</label>
+            <input type="password" name="confirm_password">
+            <label for="complete_name">Complete name:</label>
+            <input type="text" name="complete_name" value="{{ complete_name }}">
+            <label for="profiles">Profiles:</label>
+            {% if "admin" in user_profiles %}
+                <div class="checkboxes">
+                    <input type="checkbox" name="profiles" value="admin" id="profile_admin"
+                    {% if "admin" in user_profiles %}
+                        checked=True
+                    {% end %}
+                    ><label for="profile_admin">admin</label>
+                    <input type="checkbox" name="profiles" value="seller" id="profile_seller"
+                    {% if "seller" in user_profiles %}
+                        checked=True
+                    {% end %}
+                    ><label for="profile_seller">seller</label>
+                    <input type="checkbox" name="profiles" value="register" id="profile_register"
+                    {% if "register" in user_profiles %}
+                        checked=True
+                    {% end %}
+                    ><label for="profile_register">register</label>
+                </div>
+            {% else %}
+                <i class="fa
+                {% if "admin" in user_profiles %}
+                    fa-check-circle
+                {% else %}
+                    fa-circle
+                {% end %}
+                "> admin</i>
+                <i class="fa
+                {% if "seller" in user_profiles %}
+                    fa-check-circle
+                {% else %}
+                    fa-circle
+                {% end %}
+                "> seller</i>
+                <i class="fa
+                {% if "register" in user_profiles %}
+                    fa-check-circle
+                {% else %}
+                    fa-circle
+                {% end %}
+                "> register</i>
+            {% end %}
+            <input type="submit" value="Update">
+        </fieldset>
+    </form>
+{% end %}

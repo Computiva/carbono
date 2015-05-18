@@ -29,11 +29,15 @@ class LoginHandler(BaseHandler):
     def post(self):
         username = self.get_argument("username")
         password = self.get_argument("password")
-        if database.get("user:%s:password" % username) == md5(password).hexdigest():
-            self.set_secure_cookie("username", username)
-            self.redirect("/")
+        if database.get("user:%s:password" % username) != md5(password).hexdigest():
+            self.render("login.html", error_message="Wrong login or password!")
             return
-        self.render("login.html", error_message="Wrong login or password!")
+        self.set_secure_cookie("username", username)
+        if username == password:
+            self.redirect("/manage_account")
+            return
+        self.redirect("/")
+        return
 
 
 class LogoutHandler(BaseHandler):
@@ -98,6 +102,34 @@ class RemoveWorkerHandler(BaseHandler):
         self.redirect("/workers")
 
 
+class ManageAccountHandler(BaseHandler):
+
+    @authenticated
+    def get(self):
+        complete_name = database.get("user:%s:complete_name" % self.current_user)
+        user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
+        self.render("manage_account.html", complete_name=complete_name, user_profiles=user_profiles)
+
+    @authenticated
+    def post(self):
+        username = self.current_user
+        password = self.get_argument("password")
+        confirm_password = self.get_argument("confirm_password")
+        complete_name = self.get_argument("complete_name")
+        if password != confirm_password:
+            user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
+            self.render("manage_account.html", complete_name=complete_name, user_profiles=user_profiles, error_message="Passwords don't match.")
+            return
+        if password:
+            database.set("user:%s:password" % username, md5(password).hexdigest())
+        database.set("user:%s:complete_name" % username, complete_name)
+        if "profiles" in self.request.arguments.keys():
+            database.delete("user:%s:profiles" % username)
+            for profile in self.request.arguments["profiles"]:
+                database.rpush("user:%s:profiles" % username, profile)
+        self.redirect("/workers")
+
+
 settings = {
     "cookie_secret": "%X" % getrandbits(1024),
     "login_url": "/login",
@@ -111,6 +143,7 @@ application = Application([
     (r"/workers", WorkersHandler),
     (r"/register_worker", RegisterWorkerHandler),
     (r"/remove_worker", RemoveWorkerHandler),
+    (r"/manage_account", ManageAccountHandler),
     (r"/(.*\.css)", StaticFileHandler, {"path": "./www/styles"}),
     (r"/(.*\.js)", StaticFileHandler, {"path": "./www/scripts"}),
 ], **settings)
