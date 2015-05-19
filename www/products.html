@@ -1,0 +1,19 @@
+{% extends base.html %}
+{% block page %}
+    <a href="/register_product">
+        <i class="fa fa-plus"> Add product</i>
+    </a>
+    {% for product in products %}
+        <span class="list_item">
+            <a href="/product?product_id={{ product["id"] }}">
+                <i class="fa fa-archive"> | {{ product["amount"] }} | - {{ product["name"] }}</i>
+            </a>
+            <a href="/products">
+                <i class="fa fa-pencil"></i>
+            </a>
+            <a href="/remove_product?product_id={{ product["id"] }}">
+                <i class="fa fa-times"></i>
+            </a>
+        </span>
+    {% end %}
+{% end %}

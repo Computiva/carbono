@@ -10,4 +10,9 @@
             <i class="fa fa-users"> Clients</i>
         </a>
     {% end %}
+    {% if "register" in user_profiles %}
+        <a href="/products">
+            <i class="fa fa-archive"> Products</i>
+        </a>
+    {% end %}
 {% end %}
