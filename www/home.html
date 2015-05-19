@@ -5,4 +5,9 @@
             <i class="fa fa-users"> Workers</i>
         </a>
     {% end %}
+    {% if "seller" in user_profiles or "register" in user_profiles %}
+        <a href="/clients">
+            <i class="fa fa-users"> Clients</i>
+        </a>
+    {% end %}
 {% end %}

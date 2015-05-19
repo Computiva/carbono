@@ -56,7 +56,7 @@ class WorkersHandler(BaseHandler):
             self.redirect("/")
             return
         users = list()
-        for key in database.keys("*"):
+        for key in database.keys("user:*"):
             username = re.search("user:([^:]+):.*", key).groups()[0]
             if username not in users:
                 users.append(username)
@@ -130,6 +130,85 @@ class ManageAccountHandler(BaseHandler):
         self.redirect("/workers")
 
 
+class ClientsHandler(BaseHandler):
+
+    @authenticated
+    def get(self):
+        user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
+        if "seller" not in user_profiles and "register" not in user_profiles:
+            self.redirect("/")
+            return
+        clients = list()
+        for key in database.keys("client:*"):
+            client_id = re.search("client:([^:]+):.*", key).groups()[0]
+            if client_id not in map(lambda client: client["id"], clients):
+                clients.append({
+                    "id": client_id,
+                    "complete_name": database.get("client:%s:complete_name" % client_id)
+                })
+        user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
+        self.render("clients.html", clients=clients, user_profiles=user_profiles)
+
+
+class RegisterClientHandler(BaseHandler):
+
+    @authenticated
+    def get(self):
+        user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
+        if "register" not in user_profiles:
+            self.redirect("/")
+            return
+        self.render("register_client.html")
+
+    @authenticated
+    def post(self):
+        user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
+        if "register" not in user_profiles:
+            self.redirect("/")
+            return
+        complete_name = self.get_argument("complete_name")
+        address = self.get_argument("address")
+        client_ids = ["0"]
+        for key in database.keys("client:*"):
+            client_id = re.search("client:([^:]+):.*", key).groups()[0]
+            if client_id not in client_ids:
+                client_ids.append(client_id)
+        client_id = str(max(map(int, client_ids)) + 1)
+        database.set("client:%s:complete_name" % client_id, complete_name)
+        database.set("client:%s:address" % client_id, address)
+        self.redirect("/clients")
+
+
+class ViewClientHandler(BaseHandler):
+
+    @authenticated
+    def get(self):
+        user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
+        if "seller" not in user_profiles:
+            self.redirect("/")
+            return
+        client_id = self.get_argument("client_id")
+        client = {
+            "complete_name": database.get("client:%s:complete_name" % client_id),
+            "address": database.get("client:%s:address" % client_id),
+        }
+        self.render("client.html", client=client)
+
+
+class RemoveClientHandler(BaseHandler):
+
+    @authenticated
+    def get(self):
+        user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
+        if "register" not in user_profiles:
+            self.redirect("/")
+            return
+        client_id = self.get_argument("client_id")
+        for key in database.keys("client:%s:*" % client_id):
+            database.delete(key)
+        self.redirect("/clients")
+
+
 settings = {
     "cookie_secret": "%X" % getrandbits(1024),
     "login_url": "/login",
@@ -144,6 +223,10 @@ application = Application([
     (r"/register_worker", RegisterWorkerHandler),
     (r"/remove_worker", RemoveWorkerHandler),
     (r"/manage_account", ManageAccountHandler),
+    (r"/clients", ClientsHandler),
+    (r"/register_client", RegisterClientHandler),
+    (r"/client", ViewClientHandler),
+    (r"/remove_client", RemoveClientHandler),
     (r"/(.*\.css)", StaticFileHandler, {"path": "./www/styles"}),
     (r"/(.*\.js)", StaticFileHandler, {"path": "./www/scripts"}),
 ], **settings)

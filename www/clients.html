@@ -1,0 +1,23 @@
+{% extends base.html %}
+{% block page %}
+    {% if "register" in user_profiles %}
+        <a href="/register_client">
+            <i class="fa fa-user-plus"> Add client</i>
+        </a>
+    {% end %}
+    {% for client in clients %}
+        <span class="list_item">
+            <a href="/client?client_id={{ client["id"] }}">
+                <i class="fa fa-user"> {{ client["complete_name"] }}</i>
+            </a>
+            {% if "register" in user_profiles %}
+                <a href="/clients">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <a href="/remove_client?client_id={{ client["id"] }}">
+                    <i class="fa fa-user-times"></i>
+                </a>
+            {% end %}
+        </span>
+    {% end %}
+{% end %}
