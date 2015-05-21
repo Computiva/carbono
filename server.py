@@ -247,6 +247,7 @@ class RegisterProductHandler(BaseHandler):
             return
         name = self.get_argument("name")
         amount = self.get_argument("amount")
+        price = self.get_argument("price")
         product_ids = ["0"]
         for key in database.keys("product:*"):
             product_id = re.search("product:([^:]+):.*", key).groups()[0]
@@ -255,6 +256,7 @@ class RegisterProductHandler(BaseHandler):
         product_id = str(max(map(int, product_ids)) + 1)
         database.set("product:%s:name" % product_id, name)
         database.set("product:%s:amount" % product_id, amount)
+        database.set("product:%s:price" % product_id, price)
         self.redirect("/products")
 
 
@@ -270,6 +272,7 @@ class ViewProductHandler(BaseHandler):
         product = {
             "name": database.get("product:%s:name" % product_id),
             "amount": database.get("product:%s:amount" % product_id),
+            "price": database.get("product:%s:price" % product_id),
         }
         self.render("product.html", product=product)
 
