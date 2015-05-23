@@ -291,6 +291,108 @@ class RemoveProductHandler(BaseHandler):
         self.redirect("/products")
 
 
+class SalesHandler(BaseHandler):
+
+    @authenticated
+    def get(self):
+        user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
+        if "seller" not in user_profiles:
+            self.redirect("/")
+            return
+        sales = list()
+        for key in database.keys("sale:*"):
+            sale_id = re.search("sale:([^:]+):.*", key).groups()[0]
+            if sale_id not in map(lambda sale: sale["id"], sales):
+                sales.append({
+                    "id": sale_id,
+                    "client": database.get("sale:%s:client" % sale_id),
+                })
+        self.render("sales.html", sales=sales)
+
+
+class RegisterSaleHandler(BaseHandler):
+
+    @authenticated
+    def get(self):
+        user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
+        if "seller" not in user_profiles:
+            self.redirect("/")
+            return
+        clients = list()
+        for key in database.keys("client:*"):
+            client_id = re.search("client:([^:]+):.*", key).groups()[0]
+            if client_id not in map(lambda client: client["id"], clients):
+                clients.append({
+                    "id": client_id,
+                    "complete_name": database.get("client:%s:complete_name" % client_id)
+                })
+        products = list()
+        for key in database.keys("product:*"):
+            product_id = re.search("product:([^:]+):.*", key).groups()[0]
+            if product_id not in map(lambda product: product["id"], products):
+                products.append({
+                    "id": product_id,
+                    "name": database.get("product:%s:name" % product_id),
+                    "amount": database.get("product:%s:amount" % product_id),
+                    "price": database.get("product:%s:price" % product_id),
+                })
+        self.render("register_sale.html", clients=clients, products=products)
+
+    @authenticated
+    def post(self):
+        user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
+        if "seller" not in user_profiles:
+            self.redirect("/")
+            return
+        client = self.get_argument("client")
+        sale_term = self.get_argument("sale_terms")
+        initial_date = self.get_argument("initial_date")
+        times = self.get_argument("times")
+        sale_ids = ["0"]
+        for key in database.keys("sale:*"):
+            sale_id = re.search("sale:([^:]+):.*", key).groups()[0]
+            if sale_id not in sale_ids:
+                sale_ids.append(sale_id)
+        sale_id = str(max(map(int, sale_ids)) + 1)
+        database.set("sale:%s:client" % sale_id, client)
+        database.set("sale:%s:sale_term" % sale_id, sale_term)
+        database.set("sale:%s:initial_date" % sale_id, initial_date)
+        database.set("sale:%s:times" % sale_id, times)
+        self.redirect("/sales")
+
+
+class ViewSaleHandler(BaseHandler):
+
+    @authenticated
+    def get(self):
+        user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
+        if "seller" not in user_profiles:
+            self.redirect("/")
+            return
+        sale_id = self.get_argument("sale_id")
+        sale = {
+            "client": database.get("sale:%s:client" % sale_id),
+            "sale_term": database.get("sale:%s:sale_term" % sale_id),
+            "initial_date": database.get("sale:%s:initial_date" % sale_id),
+            "times": database.get("sale:%s:times" % sale_id),
+        }
+        self.render("sale.html", sale=sale)
+
+
+class RemoveSaleHandler(BaseHandler):
+
+    @authenticated
+    def get(self):
+        user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
+        if "seller" not in user_profiles:
+            self.redirect("/")
+            return
+        sale_id = self.get_argument("sale_id")
+        for key in database.keys("sale:%s:*" % sale_id):
+            database.delete(key)
+        self.redirect("/sales")
+
+
 settings = {
     "cookie_secret": "%X" % getrandbits(1024),
     "login_url": "/login",
@@ -313,6 +415,10 @@ application = Application([
     (r"/register_product", RegisterProductHandler),
     (r"/product", ViewProductHandler),
     (r"/remove_product", RemoveProductHandler),
+    (r"/sales", SalesHandler),
+    (r"/register_sale", RegisterSaleHandler),
+    (r"/sale", ViewSaleHandler),
+    (r"/remove_sale", RemoveSaleHandler),
     (r"/(.*\.css)", StaticFileHandler, {"path": "./www/styles"}),
     (r"/(.*\.js)", StaticFileHandler, {"path": "./www/scripts"}),
 ], **settings)

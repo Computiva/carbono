@@ -15,4 +15,9 @@
             <i class="fa fa-archive"> Products</i>
         </a>
     {% end %}
+    {% if "seller" in user_profiles %}
+        <a href="/sales">
+            <i class="fa fa-archive"> Sales</i>
+        </a>
+    {% end %}
 {% end %}

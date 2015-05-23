@@ -1,4 +1,4 @@
-fieldset * {
+fieldset input, fieldset label {
     display: block;
 }
 
@@ -18,4 +18,12 @@ span.list_item {
 span.list_item a:first-child {
     width: 200px;
     text-align: left;
+}
+
+table {
+    text-align: center;
+}
+
+table th {
+    width: 150px;
 }

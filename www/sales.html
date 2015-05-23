@@ -1,0 +1,19 @@
+{% extends base.html %}
+{% block page %}
+    <a href="/register_sale">
+        <i class="fa fa-plus"> Add sale</i>
+    </a>
+    {% for sale in sales %}
+        <span class="list_item">
+            <a href="/sale?sale_id={{ sale["id"] }}">
+                <i class="fa fa-user"> {{ sale["client"] }}</i>
+            </a>
+            <a href="/sales">
+                <i class="fa fa-pencil"></i>
+            </a>
+            <a href="/remove_sale?sale_id={{ sale["id"] }}">
+                <i class="fa fa-times"></i>
+            </a>
+        </span>
+    {% end %}
+{% end %}
