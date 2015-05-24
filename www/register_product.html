@@ -2,14 +2,14 @@
 {% block page %}
     <form action="/register_product" method="post">
         <fieldset>
-            <legend>Register product</legend>
-            <label for="name">Name:</label>
+            <legend>{{ _("Register product") }}</legend>
+            <label for="name">{{ _("Name") }}:</label>
             <input type="text" name="name">
-            <label for="amount">Amount:</label>
+            <label for="amount">{{ _("Amount") }}:</label>
             <input type="text" name="amount">
-            <label for="price">Price:</label>
+            <label for="price">{{ _("Price") }}:</label>
             <input type="text" name="price">
-            <input type="submit" value="Register">
+            <input type="submit" value="{{ _("Register") }}">
         </fieldset>
     </form>
 {% end %}

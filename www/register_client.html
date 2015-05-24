@@ -2,12 +2,12 @@
 {% block page %}
     <form action="/register_client" method="post">
         <fieldset>
-            <legend>Register client</legend>
-            <label for="complete_name">Complete name:</label>
+            <legend>{{ _("Register client") }}</legend>
+            <label for="complete_name">{{ _("Complete name") }}:</label>
             <input type="text" name="complete_name">
-            <label for="address">Address:</label>
+            <label for="address">{{ _("Address") }}:</label>
             <input type="text" name="address">
-            <input type="submit" value="Register">
+            <input type="submit" value="{{ _("Register") }}">
         </fieldset>
     </form>
 {% end %}

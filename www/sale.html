@@ -1,14 +1,14 @@
 {% extends base.html %}
 {% block page %}
     <fieldset>
-        <legend>Sale</legend>
-        <label for="client">Client:</label>
+        <legend>{{ _("Sale") }}</legend>
+        <label for="client">{{ _("Client") }}:</label>
         <span>{{ sale["client"] }}</span>
-        <label for="sale_term">Sale term:</label>
+        <label for="sale_term">{{ _("Sale term") }}:</label>
         <span>{{ sale["sale_term"] }}</span>
-        <label for="initial_date">Initial date:</label>
+        <label for="initial_date">{{ _("Initial date") }}:</label>
         <span>{{ sale["initial_date"] }}</span>
-        <label for="times">Times:</label>
+        <label for="times">{{ _("Times") }}:</label>
         <span>{{ sale["times"] }}</span>
     </fieldset>
 {% end %}

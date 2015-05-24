@@ -1,7 +1,7 @@
 {% extends base.html %}
 {% block page %}
     <a href="/register_product">
-        <i class="fa fa-plus"> Add product</i>
+        <i class="fa fa-plus"> {{ _("Add product") }}</i>
     </a>
     {% for product in products %}
         <span class="list_item">

@@ -1,7 +1,7 @@
 {% extends base.html %}
 {% block page %}
     <a href="/register_sale">
-        <i class="fa fa-plus"> Add sale</i>
+        <i class="fa fa-plus"> {{ _("Add sale") }}</i>
     </a>
     {% for sale in sales %}
         <span class="list_item">

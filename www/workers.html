@@ -1,7 +1,7 @@
 {% extends base.html %}
 {% block page %}
     <a href="/register_worker">
-        <i class="fa fa-user-plus"> Add worker</i>
+        <i class="fa fa-user-plus"> {{ _("Add worker") }}</i>
     </a>
     {% for user in users %}
         <span class="list_item">

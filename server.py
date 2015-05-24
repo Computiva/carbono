@@ -1,16 +1,27 @@
+# -*- coding: UTF-8 -*-
+
 from random import getrandbits
 from md5 import md5
 import re
 
 from tornado.web import Application, authenticated, RequestHandler, StaticFileHandler
 from tornado.ioloop import IOLoop
+from tornado import locale
 from redis import Redis
+
+LOCALE_DESCRIPTIONS = {
+    "en_US": "English (United States)",
+    "pt_BR": "Português (Brasil)",
+}
 
 
 class BaseHandler(RequestHandler):
 
     def get_current_user(self):
         return self.get_secure_cookie("username")
+
+    def get_user_locale(self):
+        return locale.get(database.get("user:%s:locale_code" % self.current_user))
 
 
 class HomeHandler(BaseHandler):
@@ -71,7 +82,13 @@ class RegisterWorkerHandler(BaseHandler):
         if "admin" not in user_profiles:
             self.redirect("/")
             return
-        self.render("register_worker.html")
+        locale_codes = list()
+        for locale_code in locale.get_supported_locales():
+            locale_codes.append({
+                "code": locale_code,
+                "description": LOCALE_DESCRIPTIONS[locale_code],
+            })
+        self.render("register_worker.html", locale_codes=locale_codes)
 
     @authenticated
     def post(self):
@@ -81,8 +98,10 @@ class RegisterWorkerHandler(BaseHandler):
             return
         username = self.get_argument("username")
         complete_name = self.get_argument("complete_name")
+        locale_code = self.get_argument("locale_code")
         database.set("user:%s:password" % username, md5(username).hexdigest())
         database.set("user:%s:complete_name" % username, complete_name)
+        database.set("user:%s:locale_code" % username, locale_code)
         for profile in self.request.arguments["profiles"]:
             database.rpush("user:%s:profiles" % username, profile)
         self.redirect("/workers")
@@ -425,5 +444,6 @@ application = Application([
 database = Redis()
 
 if __name__ == "__main__":
+    locale.load_translations("./locales")
     application.listen(8000)
     IOLoop.instance().start()

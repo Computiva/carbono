@@ -1,10 +1,10 @@
 {% extends base.html %}
 {% block page %}
     <fieldset>
-        <legend>Client</legend>
-        <label for="complete_name">Complete name:</label>
+        <legend>{{ _("Client") }}</legend>
+        <label for="complete_name">{{ _("Complete name") }}:</label>
         <span>{{ client["complete_name"] }}</span>
-        <label for="address">Address:</label>
+        <label for="address">{{ _("Address") }}:</label>
         <span>{{ client["address"] }}</span>
     </fieldset>
 {% end %}

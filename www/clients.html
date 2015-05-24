@@ -2,7 +2,7 @@
 {% block page %}
     {% if "register" in user_profiles %}
         <a href="/register_client">
-            <i class="fa fa-user-plus"> Add client</i>
+            <i class="fa fa-user-plus"> {{ _("Add client") }}</i>
         </a>
     {% end %}
     {% for client in clients %}

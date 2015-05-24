@@ -1,12 +1,12 @@
 {% extends base.html %}
 {% block page %}
     <fieldset>
-        <legend>Product</legend>
-        <label for="name">Name:</label>
+        <legend>{{ _("Product") }}</legend>
+        <label for="name">{{ _("Name") }}:</label>
         <span>{{ product["name"] }}</span>
-        <label for="amount">Amount:</label>
+        <label for="amount">{{ _("Amount") }}:</label>
         <span>{{ product["amount"] }}</span>
-        <label for="price">Price:</label>
+        <label for="price">{{ _("Price") }}:</label>
         <span>{{ product["price"] }}</span>
     </fieldset>
 {% end %}
