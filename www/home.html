@@ -1,5 +1,6 @@
 {% extends base.html %}
 {% block page %}
+   <div style="position: absolute; bottom: 0px; right: 0px; margin: auto; top: 320px; left: 520px;" id="page">
     {% if "admin" in user_profiles %}
         <a href="/workers">
             <i class="fa fa-users"> Workers</i>
@@ -19,5 +20,6 @@
         <a href="/sales">
             <i class="fa fa-archive"> Sales</i>
         </a>
+    </div>
     {% end %}
 {% end %}
