@@ -412,6 +412,38 @@ class RemoveSaleHandler(BaseHandler):
         self.redirect("/sales")
 
 
+class ReportsHandler(BaseHandler):
+
+    @authenticated
+    def get(self):
+        user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
+        if "admin" not in user_profiles:
+            self.redirect("/")
+            return
+        self.render("reports.html")
+
+
+class BestClientHandler(BaseHandler):
+
+    @authenticated
+    def get(self):
+        user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
+        if "admin" not in user_profiles:
+            self.redirect("/")
+            return
+        clients = list()
+        for key in database.keys("sale:*:client"):
+            client_name = database.get(key)
+            if client_name not in map(lambda client: client["complete_name"], clients):
+                clients.append({
+                    "complete_name": client_name,
+                    "sales": 0,
+                })
+            client = filter(lambda client: client["complete_name"] == client_name, clients)[0]
+            client["sales"] += 1
+        self.render("best_client.html", clients=clients)
+
+
 settings = {
     "cookie_secret": "%X" % getrandbits(1024),
     "login_url": "/login",
@@ -438,6 +470,8 @@ application = Application([
     (r"/register_sale", RegisterSaleHandler),
     (r"/sale", ViewSaleHandler),
     (r"/remove_sale", RemoveSaleHandler),
+    (r"/reports", ReportsHandler),
+    (r"/reports/best_client", BestClientHandler),
     (r"/(.*\.css)", StaticFileHandler, {"path": "./www/styles"}),
     (r"/(.*\.js)", StaticFileHandler, {"path": "./www/scripts"}),
 ], **settings)
