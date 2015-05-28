@@ -1,25 +1,25 @@
 {% extends base.html %}
 {% block page %}
-   <div id="windows">
-    {% if "admin" in user_profiles %}
-        <a href="/workers">
-            <i class="fa fa-users"> Workers</i>
-        </a>
-    {% end %}
-    {% if "seller" in user_profiles or "register" in user_profiles %}
-        <a href="/clients">
-            <i class="fa fa-users"> Clients</i>
-        </a>
-    {% end %}
-    {% if "register" in user_profiles %}
-        <a href="/products">
-            <i class="fa fa-archive"> Products</i>
-        </a>
-    {% end %}
-    {% if "seller" in user_profiles %}
-        <a href="/sales">
-            <i class="fa fa-archive"> Sales</i>
-        </a>
+    <div id="windows">
+        {% if "admin" in user_profiles %}
+            <a href="/workers">
+                <i class="fa fa-users"> Workers</i>
+            </a>
+        {% end %}
+        {% if "seller" in user_profiles or "register" in user_profiles %}
+            <a href="/clients">
+                <i class="fa fa-users"> Clients</i>
+            </a>
+        {% end %}
+        {% if "register" in user_profiles %}
+            <a href="/products">
+                <i class="fa fa-archive"> Products</i>
+            </a>
+        {% end %}
+        {% if "seller" in user_profiles %}
+            <a href="/sales">
+                <i class="fa fa-archive"> Sales</i>
+            </a>
+        {% end %}
     </div>
-    {% end %}
 {% end %}
