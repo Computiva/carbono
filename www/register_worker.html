@@ -16,7 +16,8 @@
             <label for="locale_code">{{ _("Locale") }}:</label>
             <div class="buttonset">
                 {% for locale_code in locale_codes %}
-                    <input type="radio" name="locale_code" value="{{ locale_code["code"] }}" id="locale_code_{{ locale_code["code"] }}">
+                    <input type="radio" name="locale_code" value="{{ locale_code["code"] }}" id="locale_code_{{ locale_code["code"] }}"
+                    {{ locale_code["code"] == "pt_BR" and "checked" or "" }}>
                     <label for="locale_code_{{ locale_code["code"] }}">{{ locale_code["description"] }}</label>
                 {% end %}
             </div>

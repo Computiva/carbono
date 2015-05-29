@@ -77,7 +77,7 @@ class WorkersHandler(BaseHandler):
 class RegisterWorkerHandler(BaseHandler):
 
     @authenticated
-    def get(self):
+    def get(self, **kwargs):
         user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
         if "admin" not in user_profiles:
             self.redirect("/")
@@ -88,7 +88,7 @@ class RegisterWorkerHandler(BaseHandler):
                 "code": locale_code,
                 "description": LOCALE_DESCRIPTIONS[locale_code],
             })
-        self.render("register_worker.html", locale_codes=locale_codes)
+        self.render("register_worker.html", locale_codes=locale_codes, **kwargs)
 
     @authenticated
     def post(self):
@@ -97,12 +97,15 @@ class RegisterWorkerHandler(BaseHandler):
             self.redirect("/")
             return
         username = self.get_argument("username")
+        if not re.search(r"^[a-zA-Z0-9_]+$", username):
+            self.get(error_message="Username should contain just letters, numbers or underlines.")
+            return
         complete_name = self.get_argument("complete_name")
         locale_code = self.get_argument("locale_code")
         database.set("user:%s:password" % username, md5(username).hexdigest())
         database.set("user:%s:complete_name" % username, complete_name)
         database.set("user:%s:locale_code" % username, locale_code)
-        for profile in self.request.arguments["profiles"]:
+        for profile in self.request.arguments.get("profiles", list()):
             database.rpush("user:%s:profiles" % username, profile)
         self.redirect("/workers")
 
@@ -251,12 +254,12 @@ class ProductsHandler(BaseHandler):
 class RegisterProductHandler(BaseHandler):
 
     @authenticated
-    def get(self):
+    def get(self, **kwargs):
         user_profiles = database.lrange("user:%s:profiles" % self.current_user, 0, -1)
         if "register" not in user_profiles:
             self.redirect("/")
             return
-        self.render("register_product.html")
+        self.render("register_product.html", **kwargs)
 
     @authenticated
     def post(self):
@@ -266,7 +269,13 @@ class RegisterProductHandler(BaseHandler):
             return
         name = self.get_argument("name")
         amount = self.get_argument("amount")
+        if not re.search(r"^[0-9]+$", amount):
+            self.get(error_message="Amount should be integer number.")
+            return
         price = self.get_argument("price")
+        if not re.search(r"^[0-9]+[.0-9]*$", price):
+            self.get(error_message="Price should be float number.")
+            return
         product_ids = ["0"]
         for key in database.keys("product:*"):
             product_id = re.search("product:([^:]+):.*", key).groups()[0]
