@@ -483,6 +483,7 @@ application = Application([
     (r"/reports/best_client", BestClientHandler),
     (r"/(.*\.css)", StaticFileHandler, {"path": "./www/styles"}),
     (r"/(.*\.js)", StaticFileHandler, {"path": "./www/scripts"}),
+    (r"/(.*\.png)", StaticFileHandler, {"path": "./www/images"}),
 ], **settings)
 database = Redis()
 
