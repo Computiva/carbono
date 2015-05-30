@@ -481,6 +481,7 @@ application = Application([
     (r"/remove_sale", RemoveSaleHandler),
     (r"/reports", ReportsHandler),
     (r"/reports/best_client", BestClientHandler),
+    (r"/jquery_ui/(.*)", StaticFileHandler, {"path": "./www/jquery_ui"}),
     (r"/(.*\.css)", StaticFileHandler, {"path": "./www/styles"}),
     (r"/(.*\.js)", StaticFileHandler, {"path": "./www/scripts"}),
     (r"/(.*\.png)", StaticFileHandler, {"path": "./www/images"}),

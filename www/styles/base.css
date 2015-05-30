@@ -2,14 +2,17 @@ fieldset input, fieldset label {
     display: block;
 }
 
-div#page{
+body {
+    margin: 0;
+}
+
+div#page {
     background-image: url("background.png");
     width: 100%;
     height: 100%;
 }
 
-
-div#windows{
+div#windows {
     display: inline;
     float: left;
     margin-left: 480px;
