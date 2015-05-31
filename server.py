@@ -5,6 +5,7 @@ from md5 import md5
 import re
 
 from tornado.web import Application, authenticated, RequestHandler, StaticFileHandler
+from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado import locale
 from redis import Redis
@@ -453,6 +454,13 @@ class BestClientHandler(BaseHandler):
         self.render("best_client.html", clients=clients)
 
 
+class RedirectProtocolHandler(RequestHandler):
+
+    def get(self):
+        domain = self.request.host.split(":")[0]
+        self.redirect("https://%s:8443/" % domain)
+
+
 settings = {
     "cookie_secret": "%X" % getrandbits(1024),
     "login_url": "/login",
@@ -487,9 +495,17 @@ application = Application([
     (r"/(.*\.js)", StaticFileHandler, {"path": "./www/scripts"}),
     (r"/(.*\.png)", StaticFileHandler, {"path": "./www/images"}),
 ], **settings)
+redirect_protocol = Application([
+    (r"/.*", RedirectProtocolHandler),
+])
 database = Redis()
 
 if __name__ == "__main__":
     locale.load_translations("./locales")
-    application.listen(8000)
+    redirect_protocol.listen(8000)
+    https_server = HTTPServer(application, ssl_options={
+        "certfile": "./certificate/carbono.crt",
+        "keyfile": "./certificate/carbono.pem",
+    })
+    https_server.listen(8443)
     IOLoop.instance().start()

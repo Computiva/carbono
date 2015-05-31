@@ -19,6 +19,10 @@ Carbono
 		
 		>  # pip install tornado redis
 
+	0. Generate certificate to handle https requests.
+
+		> $ ./gen_certificate.sh
+
 0. RUNNING
 
 	0. Run the server.
