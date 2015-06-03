@@ -55,21 +55,25 @@
             </table>
             <label for="total">{{ _("Total") }}:</label>
             <span id="total">R$ 0,00</span>
+            <input type="hidden" id="products_list" name="products_list">
             <label for="sale_terms">{{ _("Sale terms") }}:</label>
-            <div class="buttonset">
-                <input type="radio" name="sale_terms" value="cash_sale" id="cash_sale"><label for="cash_sale">{{ _("cash sale") }}</label>
+            <div class="buttonset" id="sale_terms">
+                <input type="radio" name="sale_terms" value="cash_sale" id="cash_sale" checked="True"><label for="cash_sale">{{ _("cash sale") }}</label>
                 <input type="radio" name="sale_terms" value="installment_sale" id="installment_sale"><label for="installment_sale">{{ _("installment sale") }}</label>
             </div>
-            <label for="initial_date">{{ _("Initial date") }}:</label>
-            <input type="text" name="initial_date" id="initial_date">
-            <label for="times">{{ _("Times") }}:</label>
-            <input type="text" name="times">
+            <div id="installment_sale_params" class="ui-helper-hidden">
+                <label for="initial_date">{{ _("Initial date") }}:</label>
+                <input type="text" name="initial_date" value="{{ today }}" id="initial_date">
+                <label for="times">{{ _("Times") }}:</label>
+                <input type="text" name="times" value="1" id="times">
+            </div>
             <label for="partials">{{ _("Partials") }}:</label>
             <table class="ui-widget ui-widget-content" id="partials">
                 <thead>
                     <tr class="ui-widget-header">
                         <th>{{ _("Date") }}</th>
                         <th>{{ _("Price") }}</th>
+                        <th>{{ _("Paid") }}</th>
                     </tr>
                 </thead>
                 <tbody>

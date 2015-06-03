@@ -2,6 +2,8 @@
 
 from random import getrandbits
 from md5 import md5
+import json
+import time
 import re
 
 from tornado.web import Application, authenticated, RequestHandler, StaticFileHandler
@@ -365,7 +367,8 @@ class RegisterSaleHandler(BaseHandler):
                     "amount": database.get("product:%s:amount" % product_id),
                     "price": database.get("product:%s:price" % product_id),
                 })
-        self.render("register_sale.html", clients=clients, products=products)
+        today = time.strftime(r"%d/%m/%Y")
+        self.render("register_sale.html", clients=clients, products=products, today=today)
 
     @authenticated
     def post(self):
@@ -377,12 +380,16 @@ class RegisterSaleHandler(BaseHandler):
         sale_term = self.get_argument("sale_terms")
         initial_date = self.get_argument("initial_date")
         times = self.get_argument("times")
+        products = json.loads(self.get_argument("products_list"))
         sale_ids = ["0"]
         for key in database.keys("sale:*"):
             sale_id = re.search("sale:([^:]+):.*", key).groups()[0]
             if sale_id not in sale_ids:
                 sale_ids.append(sale_id)
         sale_id = str(max(map(int, sale_ids)) + 1)
+        for product in products:
+            database.set("sale:%s:product:%s:amount" % (sale_id, product["id"]), product["amount"])
+            database.decr("product:%s:amount" % product["id"], amount=product["amount"])
         database.set("sale:%s:client" % sale_id, client)
         database.set("sale:%s:sale_term" % sale_id, sale_term)
         database.set("sale:%s:initial_date" % sale_id, initial_date)
@@ -404,7 +411,23 @@ class ViewSaleHandler(BaseHandler):
             "sale_term": database.get("sale:%s:sale_term" % sale_id),
             "initial_date": database.get("sale:%s:initial_date" % sale_id),
             "times": database.get("sale:%s:times" % sale_id),
+            "products": list(),
         }
+        total = 0
+        for key in database.keys("sale:%s:product:*:amount" % sale_id):
+            product_id = key.split(":")[3]
+            name = database.get("product:%s:name" % product_id)
+            amount = database.get(key)
+            price = database.get("product:%s:price" % product_id)
+            partial = float(price) * float(amount)
+            sale["products"].append({
+                "name": name,
+                "amount": amount,
+                "price": ("R$ %0.2f" % float(price)).replace(".", ","),
+                "partial": ("R$ %0.2f" % float(partial)).replace(".", ","),
+            })
+            total += partial
+        sale["total"] = ("R$ %0.2f" % total).replace(".", ",")
         self.render("sale.html", sale=sale)
 
 

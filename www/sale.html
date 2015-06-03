@@ -10,5 +10,27 @@
         <span>{{ sale["initial_date"] }}</span>
         <label for="times">{{ _("Times") }}:</label>
         <span>{{ sale["times"] }}</span>
+        <table class="ui-widget ui-widget-content">
+            <thead>
+                <tr class="ui-widget-header">
+                    <th>{{ _("Product") }}</th>
+                    <th>{{ _("Amount") }}</th>
+                    <th>{{ _("Unitary price") }}</th>
+                    <th>{{ _("Partial price") }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in sale["products"] %}
+                    <tr>
+                        <td>{{ product["name"] }}</td>
+                        <td>{{ product["amount"] }}</td>
+                        <td>{{ product["price"] }}</td>
+                        <td>{{ product["partial"] }}</td>
+                    </tr>
+                {% end %}
+            </tbody>
+        </table>
+        <label for="total">{{ _("Total") }}:</label>
+        <span>{{ sale["total"] }}</span>
     </fieldset>
 {% end %}
