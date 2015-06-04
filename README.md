@@ -23,6 +23,10 @@ Carbono
 
 		> $ ./gen_certificate.sh
 
+    0. Create admin account.
+
+        > $ python create_admin.py
+
 0. RUNNING
 
 	0. Run the server.
