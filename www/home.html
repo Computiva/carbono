@@ -3,27 +3,27 @@
     <div id="windows">
         {% if "admin" in user_profiles %}
             <a href="/workers">
-                <i class="fa fa-users"> Workers</i>
+                <img src="/user2.png" alt="Workers" style="width:128px;height:128px;"></i>
             </a>
         {% end %}
         {% if "seller" in user_profiles or "register" in user_profiles %}
             <a href="/clients">
-                <i class="fa fa-users"> Clients</i>
+                <img src="/user.png" alt="Register" style="width:128px;height:128px;"></i>
             </a>
         {% end %}
         {% if "register" in user_profiles %}
             <a href="/products">
-                <i class="fa fa-archive"> Products</i>
+                <img src="/products.png" alt="Products" style="width:128px;height:128px;"></i>
             </a>
         {% end %}
         {% if "seller" in user_profiles %}
             <a href="/sales">
-                <i class="fa fa-archive"> Sales</i>
+                <img src="/sales.png" alt="Sales" style="width:128px;height:128px;"></i>
             </a>
         {% end %}
         {% if "admin" in user_profiles %}
             <a href="/reports">
-                <i class="fa fa-line-chart"> Reports</i>
+                <img src="/reports.png" alt="Reports" style="width:128px;height:128px;"></i>
             </a>
         {% end %}
     </div>
