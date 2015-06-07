@@ -1,6 +1,18 @@
 fieldset input, fieldset label {
     display: block;
 }
+fieldset#loginform {
+    width: 200px;
+    text-align: center;
+}
+div#login {
+   
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-130px;
+    margin-top:-85px;
+}
 
 body {
     margin: 0;
