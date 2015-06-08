@@ -1,13 +1,15 @@
 {% extends base.html %}
 {% block page %}
-    <form action="/login" method="post">
-        <fieldset>
+    <div id="login">    
+    <form action="/login" method="post">  
+      <fieldset id="loginform">
             <legend>Login</legend>
             <label for="username">Username:</label>
             <input type="text" name="username">
             <label for="password">Password:</label>
             <input type="password" name="password">
-            <input type="submit" value="Sign in" class="botao">
+            <input type="submit" value="Sign in" class="button">
         </fieldset>
     </form>
+    </div>
 {% end %}
