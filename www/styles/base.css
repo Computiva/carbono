@@ -14,6 +14,16 @@ div#login {
     margin-top:-85px;
 }
 
+div#manage  {
+
+    width: 400;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -230px;
+    margin-top: -85px;
+}
+
 body {
     margin: 0;
 }

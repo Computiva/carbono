@@ -1,16 +1,17 @@
 {% extends base.html %}
 {% block page %}
     <form action="/manage_account" method="post">
-        <fieldset>
+      <div id=manage>
+        <fieldset style="text-align: center;">           
             <legend>{{ _("Manage account") }}</legend>
             <label for="username">{{ _("Username") }}:</label>
             <span>{{ current_user }}</span>
             <label for="password">{{ _("Password") }}:</label>
-            <input type="password" name="password">
-            <label for="confirm_password">{{ _("Confirm password") }}:</label>
-            <input type="password" name="confirm_password">
+            <input style="margin-left: 60px;" type="password" name="password" style="text-align: center;">
+            <label for="confirm_password">{{ _("Confirm password") }}:</label>            
+            <input style="margin-left: 60px;" type="password" name="confirm_password" style="text-align: center;">
             <label for="complete_name">{{ _("Complete name") }}:</label>
-            <input type="text" name="complete_name" value="{{ complete_name }}">
+            <input style="margin-left: 60px;"type="text" name="complete_name" value="{{ complete_name }}" style="text-align: center;">
             <label for="profiles">{{ _("Profiles") }}:</label>
             {% if "admin" in user_profiles %}
                 <div class="buttonset">
@@ -53,7 +54,8 @@
                 {% end %}
                 "> {{ _("register") }}</i>
             {% end %}
-            <input type="submit" value="{{ _("Update") }}">
-        </fieldset>
-    </form>
+            <input class="button" type="submit" value="{{ _("Update") }}">       
+            </div>        
+            </fieldset>
+            </form>
 {% end %}
