@@ -1,6 +1,7 @@
 fieldset input, fieldset label {
     display: block;
 }
+
 fieldset#loginform {
     width: 200px;
     text-align: center;
