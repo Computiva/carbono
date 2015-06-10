@@ -6,6 +6,17 @@ fieldset#loginform {
     width: 200px;
     text-align: center;
 }
+
+div#workr {
+margin-left:20px;  
+margin-top:10;
+}
+
+div#wks2 {
+margin-top: 20px;
+margin-left: 20px;
+}
+
 div#login {
    
     position:absolute;

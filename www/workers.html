@@ -1,18 +1,22 @@
 {% extends base.html %}
 {% block page %}
     <a href="/register_worker">
-        <i class="fa fa-user-plus"> {{ _("Add worker") }}</i>
+<div id=workr>
+        <i class="button"> {{ _("+ Add worker") }}
+ </i></div>
     </a>
     {% for user in users %}
         <span class="list_item">
             <a href="/workers">
-                <i class="fa fa-user"> {{ user }}</i>
+                <div id= wks2>
+            <i class="fa fa-user"> {{ user }}</i>
             </a>
             <a href="/workers">
                 <i class="fa fa-pencil"></i>
             </a>
             <a href="/remove_worker?username={{ user }}">
                 <i class="fa fa-user-times"></i>
+            </div>
             </a>
         </span>
     {% end %}
