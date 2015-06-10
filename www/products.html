@@ -1,8 +1,9 @@
 {% extends base.html %}
 {% block page %}
-    <a href="/register_product">
-        <i class="fa fa-plus"> {{ _("Add product") }}</i>
-    </a>
+<div id=workr>    
+<a href="/register_product">
+        <i class="button"> {{ _("✚ Add product") }}</i>
+    </a> </div>
     {% for product in products %}
         <span class="list_item">
             <a href="/product?product_id={{ product["id"] }}">

@@ -1,9 +1,10 @@
 {% extends base.html %}
 {% block page %}
     {% if "register" in user_profiles %}
-        <a href="/register_client">
-            <i class="fa fa-user-plus"> {{ _("Add client") }}</i>
-        </a>
+            <div id=workr>
+            <a href="/register_client">
+            <i class="button"> {{ _("✚ Add client") }}</i>
+        </a></div>
     {% end %}
     {% for client in clients %}
         <span class="list_item">

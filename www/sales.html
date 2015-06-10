@@ -1,8 +1,9 @@
 {% extends base.html %}
 {% block page %}
-    <a href="/register_sale">
-        <i class="fa fa-plus"> {{ _("Add sale") }}</i>
-    </a>
+         <div id=workr>
+         <a href="/register_sale">
+        <i class="button"> {{ _("✚ Add sale") }}</i>
+    </a></div>
     {% for sale in sales %}
         <span class="list_item">
             <a href="/sale?sale_id={{ sale["id"] }}">
