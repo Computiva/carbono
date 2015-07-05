@@ -14,19 +14,23 @@
     <body>
         <img id="background" src="background.png" />
         <div id="user_bar" class="ui-widget-header">
-            <a href="/">
-                <i class="fa fa-home fa-2x"></i>
-            </a>
+            <div id="left_user_bar">
+                <a href="/">
+                    <i class="fa fa-home fa-2x"></i>
+                </a>
+            </div>
             {% if current_user %}
-                <a href="/manage_account">
-                   <i style="position: fixed; right: 8px; top: 4px;" class="fa fa-cog fa-2x"></i>
-                </a>
-                <span>
-                    <i class="fa fa-user fa-2x"> {{ current_user }}</i>
-                </span>
-                <a href="/logout">
-                    <i class="fa fa-sign-out fa-2x"></i>
-                </a>
+                <div id="right_user_bar">
+                    <a href="/manage_account">
+                       <i class="fa fa-cog fa-2x right_align"></i>
+                    </a>
+                    <span>
+                        <i class="fa fa-2x">{{ current_user }}</i>
+                    </span>
+                    <a href="/logout">
+                        <i class="fa fa-sign-out fa-2x"></i>
+                    </a>
+                </div>
             {% end %}
         </div>
         {% if "error_message" in globals().keys() %}
