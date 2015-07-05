@@ -1,62 +1,61 @@
 {% extends base.html %}
 {% block page %}
-
-    <form action="/manage_account" method="post">
-      <div id=manage>
-        <fieldset style="text-align: center;">           
-            <legend>{{ _("Manage account") }}</legend>
-            <label for="username">{{ _("Username") }}:</label>
-            <span>{{ current_user }}</span>
-            <label for="password">{{ _("Password") }}:</label>
-            <input style="margin-left: 70px;" type="password" name="password" style="text-align: center;">
-            <label for="confirm_password">{{ _("Confirm password") }}:</label>            
-            <input style="margin-left: 70px;" type="password" name="confirm_password" style="text-align: center;">
-            <label for="complete_name">{{ _("Complete name") }}:</label>
-            <input style="margin-left: 70px;"type="text" name="complete_name" value="{{ complete_name }}" style="text-align: center;">
-            <label for="profiles">{{ _("Profiles") }}:</label>
-            {% if "admin" in user_profiles %}
-                <div class="buttonset">
-                    <input type="checkbox" name="profiles" value="admin" id="profile_admin"
-                    {% if "admin" in user_profiles %}
-                        checked=True
-                    {% end %}
-                    ><label for="profile_admin">{{ _("admin") }}</label>
-                    <input type="checkbox" name="profiles" value="seller" id="profile_seller"
-                    {% if "seller" in user_profiles %}
-                        checked=True
-                    {% end %}
-                    ><label for="profile_seller">{{ _("seller") }}</label>
-                    <input type="checkbox" name="profiles" value="register" id="profile_register"
-                    {% if "register" in user_profiles %}
-                        checked=True
-                    {% end %}
-                    ><label for="profile_register">{{ _("register") }}</label>
-                </div>
-            {% else %}
-                <i class="fa
+    <div class="medium_page">
+        <form action="/manage_account" method="post">
+            <fieldset style="text-align: center;">
+                <legend>{{ _("Manage account") }}</legend>
+                <label for="username">{{ _("Username") }}:</label>
+                <span>{{ current_user }}</span>
+                <label for="password">{{ _("Password") }}:</label>
+                <input style="margin-left: 70px;" type="password" name="password" style="text-align: center;">
+                <label for="confirm_password">{{ _("Confirm password") }}:</label>
+                <input style="margin-left: 70px;" type="password" name="confirm_password" style="text-align: center;">
+                <label for="complete_name">{{ _("Complete name") }}:</label>
+                <input style="margin-left: 70px;"type="text" name="complete_name" value="{{ complete_name }}" style="text-align: center;">
+                <label for="profiles">{{ _("Profiles") }}:</label>
                 {% if "admin" in user_profiles %}
-                    fa-check-circle
+                    <div class="buttonset">
+                        <input type="checkbox" name="profiles" value="admin" id="profile_admin"
+                        {% if "admin" in user_profiles %}
+                            checked=True
+                        {% end %}
+                        ><label for="profile_admin">{{ _("admin") }}</label>
+                        <input type="checkbox" name="profiles" value="seller" id="profile_seller"
+                        {% if "seller" in user_profiles %}
+                            checked=True
+                        {% end %}
+                        ><label for="profile_seller">{{ _("seller") }}</label>
+                        <input type="checkbox" name="profiles" value="register" id="profile_register"
+                        {% if "register" in user_profiles %}
+                            checked=True
+                        {% end %}
+                        ><label for="profile_register">{{ _("register") }}</label>
+                    </div>
                 {% else %}
-                    fa-circle
+                    <i class="fa
+                    {% if "admin" in user_profiles %}
+                        fa-check-circle
+                    {% else %}
+                        fa-circle
+                    {% end %}
+                    "> {{ _("admin") }}</i>
+                    <i class="fa
+                    {% if "seller" in user_profiles %}
+                        fa-check-circle
+                    {% else %}
+                        fa-circle
+                    {% end %}
+                    "> {{ _("seller") }}</i>
+                    <i class="fa
+                    {% if "register" in user_profiles %}
+                        fa-check-circle
+                    {% else %}
+                        fa-circle
+                    {% end %}
+                    "> {{ _("register") }}</i>
                 {% end %}
-                "> {{ _("admin") }}</i>
-                <i class="fa
-                {% if "seller" in user_profiles %}
-                    fa-check-circle
-                {% else %}
-                    fa-circle
-                {% end %}
-                "> {{ _("seller") }}</i>
-                <i class="fa
-                {% if "register" in user_profiles %}
-                    fa-check-circle
-                {% else %}
-                    fa-circle
-                {% end %}
-                "> {{ _("register") }}</i>
-            {% end %}
-            <input class="button ui-button ui-widget ui-state-default ui-corner-all" type="submit" value="{{ _("Update") }}">       
-            </div>        
+                <input class="button ui-button ui-widget ui-state-default ui-corner-all" type="submit" value="{{ _("Update") }}">
             </fieldset>
-            </form>
+        </form>
+    </div>
 {% end %}

@@ -1,8 +1,10 @@
 {% extends base.html %}
 {% block page %}
-    {% for client in clients %}
-        <span class="list_item">
-            <i class="fa fa-star"> | {{ client["sales"] }} | - {{ client["complete_name"] }}</i>
-        </span>
-    {% end %}
+    <div class="medium_page">
+        {% for client in clients %}
+            <span class="list_item">
+                <i class="fa fa-star"> | {{ client["sales"] }} | - {{ client["complete_name"] }}</i>
+            </span>
+        {% end %}
+    </div>
 {% end %}

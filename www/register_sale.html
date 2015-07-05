@@ -22,64 +22,66 @@
 {% end %}
 
 {% block page %}
-    <div id="add_product_form" class="ui-helper-hidden" title="{{ _("Include product") }}">
-        <form>
+    <div class="large_page">
+        <div id="add_product_form" class="ui-helper-hidden" title="{{ _("Include product") }}">
+            <form>
+                <fieldset>
+                    <label for="product">{{ _("Product") }}:</label>
+                    <input type="text" name="product" id="product_name">
+                    <label for="amount">{{ _("Amount") }}:</label>
+                    <input type="text" name="amount" id="product_amount">
+                </fieldset>
+            </form>
+        </div>
+        <form action="/register_sale" method="post">
             <fieldset>
-                <label for="product">{{ _("Product") }}:</label>
-                <input type="text" name="product" id="product_name">
-                <label for="amount">{{ _("Amount") }}:</label>
-                <input type="text" name="amount" id="product_amount">
+                <legend>{{ _("Register sale") }}</legend>
+                <label for="client">{{ _("Client") }}:</label>
+                <input type="checkbox" name="registered_client" id="registered_client"><label for="registered_client">{{ _("registered") }}</label>
+                <input type="text" name="client" id="client_name" class="ui-helper-hidden">
+                <label for="products">{{ _("Products") }}:</label>
+                <a id="add_product">{{ _("Include product") }}</a>
+                <table class="ui-widget ui-widget-content" id="products_list">
+                    <thead>
+                        <tr class="ui-widget-header">
+                            <th>{{ _("Product") }}</th>
+                            <th>{{ _("Amount") }}</th>
+                            <th>{{ _("Unitary price") }}</th>
+                            <th>{{ _("Partial price") }}</th>
+                            <th>{{ _("Actions") }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <label for="total">{{ _("Total") }}:</label>
+                <span id="total">R$ 0,00</span>
+                <input type="hidden" id="products_list" name="products_list">
+                <label for="sale_terms">{{ _("Sale terms") }}:</label>
+                <div class="buttonset" id="sale_terms">
+                    <input type="radio" name="sale_terms" value="cash_sale" id="cash_sale" checked="True"><label for="cash_sale">{{ _("cash sale") }}</label>
+                    <input type="radio" name="sale_terms" value="installment_sale" id="installment_sale"><label for="installment_sale">{{ _("installment sale") }}</label>
+                </div>
+                <div id="installment_sale_params" class="ui-helper-hidden">
+                    <label for="initial_date">{{ _("Initial date") }}:</label>
+                    <input type="text" name="initial_date" value="{{ today }}" id="initial_date">
+                    <label for="times">{{ _("Times") }}:</label>
+                    <input type="text" name="times" value="1" id="times">
+                </div>
+                <label for="partials">{{ _("Partials") }}:</label>
+                <table class="ui-widget ui-widget-content" id="partials">
+                    <thead>
+                        <tr class="ui-widget-header">
+                            <th>{{ _("Date") }}</th>
+                            <th>{{ _("Price") }}</th>
+                            <th>{{ _("Paid") }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <input type="submit" class="button ui-button ui-widget ui-state-default ui-corner-all" value="{{ _("Register") }}">
             </fieldset>
         </form>
     </div>
-    <form action="/register_sale" method="post">
-        <fieldset>
-            <legend>{{ _("Register sale") }}</legend>
-            <label for="client">{{ _("Client") }}:</label>
-            <input type="checkbox" name="registered_client" id="registered_client"><label for="registered_client">{{ _("registered") }}</label>
-            <input type="text" name="client" id="client_name" class="ui-helper-hidden">
-            <label for="products">{{ _("Products") }}:</label>
-            <a id="add_product">{{ _("Include product") }}</a>
-            <table class="ui-widget ui-widget-content" id="products_list">
-                <thead>
-                    <tr class="ui-widget-header">
-                        <th>{{ _("Product") }}</th>
-                        <th>{{ _("Amount") }}</th>
-                        <th>{{ _("Unitary price") }}</th>
-                        <th>{{ _("Partial price") }}</th>
-                        <th>{{ _("Actions") }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <label for="total">{{ _("Total") }}:</label>
-            <span id="total">R$ 0,00</span>
-            <input type="hidden" id="products_list" name="products_list">
-            <label for="sale_terms">{{ _("Sale terms") }}:</label>
-            <div class="buttonset" id="sale_terms">
-                <input type="radio" name="sale_terms" value="cash_sale" id="cash_sale" checked="True"><label for="cash_sale">{{ _("cash sale") }}</label>
-                <input type="radio" name="sale_terms" value="installment_sale" id="installment_sale"><label for="installment_sale">{{ _("installment sale") }}</label>
-            </div>
-            <div id="installment_sale_params" class="ui-helper-hidden">
-                <label for="initial_date">{{ _("Initial date") }}:</label>
-                <input type="text" name="initial_date" value="{{ today }}" id="initial_date">
-                <label for="times">{{ _("Times") }}:</label>
-                <input type="text" name="times" value="1" id="times">
-            </div>
-            <label for="partials">{{ _("Partials") }}:</label>
-            <table class="ui-widget ui-widget-content" id="partials">
-                <thead>
-                    <tr class="ui-widget-header">
-                        <th>{{ _("Date") }}</th>
-                        <th>{{ _("Price") }}</th>
-                        <th>{{ _("Paid") }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <input type="submit" class="button ui-button ui-widget ui-state-default ui-corner-all" value="{{ _("Register") }}">
-        </fieldset>
-    </form>
 {% end %}

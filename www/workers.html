@@ -1,23 +1,23 @@
 {% extends base.html %}
 {% block page %}
-    <a href="/register_worker">
-<div id=workr>
-        <i class="button ui-button ui-widget ui-state-default ui-corner-all"> {{ _("+ Add worker") }}
- </i></div>
-    </a>
-    {% for user in users %}
-        <span class="list_item">
-            <a href="/workers">
-                <div id= wks2>
-            <i class="fa fa-user"> {{ user }}</i>
-            </a>
-            <a href="/workers">
-                <i class="fa fa-pencil"></i>
-            </a>
-            <a href="/remove_worker?username={{ user }}">
-                <i class="fa fa-user-times"></i>
-            </div>
-            </a>
-        </span>
-    {% end %}
+    <div class="medium_page">
+        <a href="/register_worker">
+            <i class="button ui-button ui-widget ui-state-default ui-corner-all"> {{ _("+ Add worker") }}</i>
+        </a>
+        {% for user in users %}
+            <span class="list_item">
+                <a href="/workers">
+                    <div id= wks2>
+                <i class="fa fa-user"> {{ user }}</i>
+                </a>
+                <a href="/workers">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <a href="/remove_worker?username={{ user }}">
+                    <i class="fa fa-user-times"></i>
+                </div>
+                </a>
+            </span>
+        {% end %}
+    </div>
 {% end %}

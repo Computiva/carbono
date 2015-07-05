@@ -1,27 +1,28 @@
 {% extends base.html %}
 {% block page %}
-    <form action="/register_worker" method="post">
-        <fieldset>
-            <legend>{{ _("Register worker") }}</legend>
-            <label for="username">{{ _("Username") }}:</label>
-            <input type="text" name="username">
-            <label for="complete_name">{{ _("Complete name") }}:</label>
-            <input type="text" name="complete_name">
-            <label for="profiles">{{ _("Profiles") }}:</label>
-            <div class="buttonset">
-                <input type="checkbox" name="profiles" value="admin" id="profile_admin"><label for="profile_admin">{{ _("admin") }}</label>
-                <input type="checkbox" name="profiles" value="seller" id="profile_seller"><label for="profile_seller">{{ _("seller") }}</label>
-                <input type="checkbox" name="profiles" value="register" id="profile_register"><label for="profile_register">{{ _("register") }}</label>
-            </div>
-            <label for="locale_code">{{ _("Locale") }}:</label>
-            <div class="buttonset">
-                {% for locale_code in locale_codes %}
-                    <input type="radio" name="locale_code" value="{{ locale_code["code"] }}" id="locale_code_{{ locale_code["code"] }}"
-                    {{ locale_code["code"] == "pt_BR" and "checked" or "" }}>
-                    <label for="locale_code_{{ locale_code["code"] }}">{{ locale_code["description"] }}</label>
-                {% end %}
-            </div>
-            <input type="submit" value="{{ _("Register") }}">
-        </fieldset>
-    </form>
+    <div class="medium_page">
+        <form action="/register_worker" method="post">
+            <fieldset>
+                <legend>{{ _("Register worker") }}</legend>
+                <label for="username">{{ _("Username") }}:</label>
+                <input type="text" name="username">
+                <label for="complete_name">{{ _("Complete name") }}:</label>
+                <input type="text" name="complete_name">
+                <label for="profiles">{{ _("Profiles") }}:</label>
+                <div class="buttonset">
+                    <input type="checkbox" name="profiles" value="admin" id="profile_admin"><label for="profile_admin">{{ _("admin") }}</label>
+                    <input type="checkbox" name="profiles" value="seller" id="profile_seller"><label for="profile_seller">{{ _("seller") }}</label>
+                    <input type="checkbox" name="profiles" value="register" id="profile_register"><label for="profile_register">{{ _("register") }}</label>
+                </div>
+                <label for="locale_code">{{ _("Locale") }}:</label>
+                <div class="buttonset">
+                    {% for locale_code in locale_codes %}
+                        <input type="radio" name="locale_code" value="{{ locale_code["code"] }}" id="locale_code_{{ locale_code["code"] }}"
+                        {{ locale_code["code"] == "pt_BR" and "checked" or "" }}>
+                        <label for="locale_code_{{ locale_code["code"] }}">{{ locale_code["description"] }}</label>
+                    {% end %}
+                </div>
+                <input type="submit" value="{{ _("Register") }}">
+            </fieldset>
+        </form>
 {% end %}

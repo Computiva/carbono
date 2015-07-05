@@ -1,20 +1,23 @@
 {% extends base.html %}
 {% block page %}
-<div id=workr>    
-<a href="/register_product">
-        <i class="button ui-button ui-widget ui-state-default ui-corner-all"> {{ _("✚ Add product") }}</i>
-    </a> </div>
-    {% for product in products %}
-        <span class="list_item">
-            <a href="/product?product_id={{ product["id"] }}">
-                <i class="fa fa-archive"> | {{ product["amount"] }} | - {{ product["name"] }}</i>
+    <div class="medium_page">
+        <div id=workr>
+            <a href="/register_product">
+                <i class="button ui-button ui-widget ui-state-default ui-corner-all"> {{ _("✚ Add product") }}</i>
             </a>
-            <a href="/products">
-                <i class="fa fa-pencil"></i>
-            </a>
-            <a href="/remove_product?product_id={{ product["id"] }}">
-                <i class="fa fa-times"></i>
-            </a>
-        </span>
-    {% end %}
+        </div>
+        {% for product in products %}
+            <span class="list_item">
+                <a href="/product?product_id={{ product["id"] }}">
+                    <i class="fa fa-archive"> | {{ product["amount"] }} | - {{ product["name"] }}</i>
+                </a>
+                <a href="/products">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <a href="/remove_product?product_id={{ product["id"] }}">
+                    <i class="fa fa-times"></i>
+                </a>
+            </span>
+        {% end %}
+    </div>
 {% end %}

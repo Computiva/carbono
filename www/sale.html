@@ -1,36 +1,38 @@
 {% extends base.html %}
 {% block page %}
-    <fieldset>
-        <legend>{{ _("Sale") }}</legend>
-        <label for="client">{{ _("Client") }}:</label>
-        <span>{{ sale["client"] }}</span>
-        <label for="sale_term">{{ _("Sale term") }}:</label>
-        <span>{{ sale["sale_term"] }}</span>
-        <label for="initial_date">{{ _("Initial date") }}:</label>
-        <span>{{ sale["initial_date"] }}</span>
-        <label for="times">{{ _("Times") }}:</label>
-        <span>{{ sale["times"] }}</span>
-        <table class="ui-widget ui-widget-content">
-            <thead>
-                <tr class="ui-widget-header">
-                    <th>{{ _("Product") }}</th>
-                    <th>{{ _("Amount") }}</th>
-                    <th>{{ _("Unitary price") }}</th>
-                    <th>{{ _("Partial price") }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for product in sale["products"] %}
-                    <tr>
-                        <td>{{ product["name"] }}</td>
-                        <td>{{ product["amount"] }}</td>
-                        <td>{{ product["price"] }}</td>
-                        <td>{{ product["partial"] }}</td>
+    <div class="medium_page">
+        <fieldset>
+            <legend>{{ _("Sale") }}</legend>
+            <label for="client">{{ _("Client") }}:</label>
+            <span>{{ sale["client"] }}</span>
+            <label for="sale_term">{{ _("Sale term") }}:</label>
+            <span>{{ sale["sale_term"] }}</span>
+            <label for="initial_date">{{ _("Initial date") }}:</label>
+            <span>{{ sale["initial_date"] }}</span>
+            <label for="times">{{ _("Times") }}:</label>
+            <span>{{ sale["times"] }}</span>
+            <table class="ui-widget ui-widget-content">
+                <thead>
+                    <tr class="ui-widget-header">
+                        <th>{{ _("Product") }}</th>
+                        <th>{{ _("Amount") }}</th>
+                        <th>{{ _("Unitary price") }}</th>
+                        <th>{{ _("Partial price") }}</th>
                     </tr>
-                {% end %}
-            </tbody>
-        </table>
-        <label for="total">{{ _("Total") }}:</label>
-        <span>{{ sale["total"] }}</span>
-    </fieldset>
+                </thead>
+                <tbody>
+                    {% for product in sale["products"] %}
+                        <tr>
+                            <td>{{ product["name"] }}</td>
+                            <td>{{ product["amount"] }}</td>
+                            <td>{{ product["price"] }}</td>
+                            <td>{{ product["partial"] }}</td>
+                        </tr>
+                    {% end %}
+                </tbody>
+            </table>
+            <label for="total">{{ _("Total") }}:</label>
+            <span>{{ sale["total"] }}</span>
+        </fieldset>
+    </div>
 {% end %}

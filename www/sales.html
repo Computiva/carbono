@@ -1,20 +1,23 @@
 {% extends base.html %}
 {% block page %}
-         <div id=workr>
-         <a href="/register_sale">
-        <i class="button ui-button ui-widget ui-state-default ui-corner-all"> {{ _("✚ Add sale") }}</i>
-    </a></div>
-    {% for sale in sales %}
-        <span class="list_item">
-            <a href="/sale?sale_id={{ sale["id"] }}">
-                <i class="fa fa-user"> {{ sale["client"] }}</i>
+    <div class="medium_page">
+        <div id=workr>
+            <a href="/register_sale">
+                <i class="button ui-button ui-widget ui-state-default ui-corner-all"> {{ _("✚ Add sale") }}</i>
             </a>
-            <a href="/sales">
-                <i class="fa fa-pencil"></i>
-            </a>
-            <a href="/remove_sale?sale_id={{ sale["id"] }}">
-                <i class="fa fa-times"></i>
-            </a>
-        </span>
-    {% end %}
+        </div>
+        {% for sale in sales %}
+            <span class="list_item">
+                <a href="/sale?sale_id={{ sale["id"] }}">
+                    <i class="fa fa-user"> {{ sale["client"] }}</i>
+                </a>
+                <a href="/sales">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <a href="/remove_sale?sale_id={{ sale["id"] }}">
+                    <i class="fa fa-times"></i>
+                </a>
+            </span>
+        {% end %}
+    </div>
 {% end %}

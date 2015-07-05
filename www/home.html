@@ -1,29 +1,29 @@
 {% extends base.html %}
 {% block page %}
-    <div id="windows">
+    <div class="large_page">
         {% if "admin" in user_profiles %}
             <a href="/workers">
-                <img src="/user2.png" alt="Workers" style="width:128px;height:128px;"></i>
+                <img src="/user2.png" alt="Workers" class="live_tile"></img>
             </a>
         {% end %}
         {% if "seller" in user_profiles or "register" in user_profiles %}
             <a href="/clients">
-                <img src="/user.png" alt="Register" style="width:128px;height:128px;"></i>
+                <img src="/user.png" alt="Register" class="live_tile"></img>
             </a>
         {% end %}
         {% if "register" in user_profiles %}
             <a href="/products">
-                <img src="/products.png" alt="Products" style="width:128px;height:128px;"></i>
+                <img src="/products.png" alt="Products" class="live_tile"></img>
             </a>
         {% end %}
         {% if "seller" in user_profiles %}
             <a href="/sales">
-                <img src="/sales.png" alt="Sales" style="width:128px;height:128px;"></i>
+                <img src="/sales.png" alt="Sales" class="live_tile"></img>
             </a>
         {% end %}
         {% if "admin" in user_profiles %}
             <a href="/reports">
-                <img src="/reports.png" alt="Reports" style="width:128px;height:128px;"></i>
+                <img src="/reports.png" alt="Reports" class="live_tile"></img>
             </a>
         {% end %}
     </div>

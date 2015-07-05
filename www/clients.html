@@ -1,24 +1,27 @@
 {% extends base.html %}
 {% block page %}
-    {% if "register" in user_profiles %}
+    <div class="medium_page">
+        {% if "register" in user_profiles %}
             <div id=workr>
-            <a href="/register_client">
-            <i class="button ui-button ui-widget ui-state-default ui-corner-all"> {{ _("✚ Add client") }}</i>
-        </a></div>
-    {% end %}
-    {% for client in clients %}
-        <span class="list_item">
-            <a href="/client?client_id={{ client["id"] }}">
-                <i class="fa fa-user"> {{ client["complete_name"] }}</i>
-            </a>
-            {% if "register" in user_profiles %}
-                <a href="/clients">
-                    <i class="fa fa-pencil"></i>
+                <a href="/register_client">
+                    <i class="button ui-button ui-widget ui-state-default ui-corner-all"> {{ _("✚ Add client") }}</i>
                 </a>
-                <a href="/remove_client?client_id={{ client["id"] }}">
-                    <i class="fa fa-user-times"></i>
+            </div>
+        {% end %}
+        {% for client in clients %}
+            <span class="list_item">
+                <a href="/client?client_id={{ client["id"] }}">
+                    <i class="fa fa-user"> {{ client["complete_name"] }}</i>
                 </a>
-            {% end %}
-        </span>
-    {% end %}
+                {% if "register" in user_profiles %}
+                    <a href="/clients">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <a href="/remove_client?client_id={{ client["id"] }}">
+                        <i class="fa fa-user-times"></i>
+                    </a>
+                {% end %}
+            </span>
+        {% end %}
+    </div>
 {% end %}

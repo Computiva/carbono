@@ -1,15 +1,17 @@
 {% extends base.html %}
 {% block page %}
-    <form action="/register_product" method="post">
-        <fieldset>
-            <legend>{{ _("Register product") }}</legend>
-            <label for="name">{{ _("Name") }}:</label>
-            <input type="text" name="name">
-            <label for="amount">{{ _("Amount") }}:</label>
-            <input type="text" name="amount">
-            <label for="price">{{ _("Price") }}:</label>
-            <input type="text" name="price">
-            <input type="submit" class="button ui-button ui-widget ui-state-default ui-corner-all" value="{{ _("Register") }}">
-        </fieldset>
-    </form>
+    <div class="medium_page">
+        <form action="/register_product" method="post">
+            <fieldset>
+                <legend>{{ _("Register product") }}</legend>
+                <label for="name">{{ _("Name") }}:</label>
+                <input type="text" name="name">
+                <label for="amount">{{ _("Amount") }}:</label>
+                <input type="text" name="amount">
+                <label for="price">{{ _("Price") }}:</label>
+                <input type="text" name="price">
+                <input type="submit" class="button ui-button ui-widget ui-state-default ui-corner-all" value="{{ _("Register") }}">
+            </fieldset>
+        </form>
+    </div>
 {% end %}
