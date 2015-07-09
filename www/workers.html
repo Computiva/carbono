@@ -7,15 +7,13 @@
         {% for user in users %}
             <span class="list_item">
                 <a href="/workers">
-                    <div id= wks2>
-                <i class="fa fa-user"> {{ user }}</i>
+                    <i class="fa fa-user"> {{ user }}</i>
                 </a>
                 <a href="/workers">
                     <i class="fa fa-pencil"></i>
                 </a>
                 <a href="/remove_worker?username={{ user }}">
                     <i class="fa fa-user-times"></i>
-                </div>
                 </a>
             </span>
         {% end %}
