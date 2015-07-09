@@ -7,11 +7,11 @@
                 <label for="username">{{ _("Username") }}:</label>
                 <span>{{ current_user }}</span>
                 <label for="password">{{ _("Password") }}:</label>
-                <input style="margin-left: 70px;" type="password" name="password" style="text-align: center;">
+                <input type="password" name="password" style="text-align: center;">
                 <label for="confirm_password">{{ _("Confirm password") }}:</label>
-                <input style="margin-left: 70px;" type="password" name="confirm_password" style="text-align: center;">
+                <input type="password" name="confirm_password" style="text-align: center;">
                 <label for="complete_name">{{ _("Complete name") }}:</label>
-                <input style="margin-left: 70px;"type="text" name="complete_name" value="{{ complete_name }}" style="text-align: center;">
+                <input type="text" name="complete_name" value="{{ complete_name }}" style="text-align: center;">
                 <label for="profiles">{{ _("Profiles") }}:</label>
                 {% if "admin" in user_profiles %}
                     <div class="buttonset">
