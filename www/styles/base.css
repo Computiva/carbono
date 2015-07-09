@@ -7,6 +7,10 @@ fieldset#loginform {
     text-align: center;
 }
 
+fieldset input[type=text], fieldset input[type=password] {
+    width: 100%;
+}
+
 div#workr {
 margin-left:20px;  
 margin-top:10;
