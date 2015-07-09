@@ -1,4 +1,8 @@
-fieldset input, fieldset label {
+div.buttonset label {
+    display: inline;
+}
+
+fieldset label {
     display: block;
 }
 
