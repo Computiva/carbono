@@ -38,13 +38,16 @@ class HomeHandler(BaseHandler):
 class LoginHandler(BaseHandler):
 
     def get(self):
-        self.render("login.html")
+        self.render("login.html", databases=databases.keys())
 
     def post(self):
+        database_name = self.get_argument("database_name", databases.keys()[0])
         username = self.get_argument("username")
         password = self.get_argument("password")
+        global database
+        database = Redis(db=int(databases.get(database_name, 0)))
         if database.get("user:%s:password" % username) != md5(password).hexdigest():
-            self.render("login.html", error_message="Wrong login or password!")
+            self.render("login.html", error_message="Wrong login or password!", databases=databases.keys())
             return
         self.set_secure_cookie("username", username)
         if username == password:
@@ -522,6 +525,7 @@ redirect_protocol = Application([
     (r"/.*", RedirectProtocolHandler),
 ])
 database = Redis()
+databases = dict(map(lambda line: line.strip("\n").split(":"), open("databases.dat").readlines()))
 
 if __name__ == "__main__":
     locale.load_translations("./locales")
