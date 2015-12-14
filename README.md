@@ -16,7 +16,7 @@ Carbono
 
 		>  # apt-get install python-pip
 
-    0. Need you installed python webkit 
+    0. Install python webkit 
 
         >  # apt-get install python-webkit
 
