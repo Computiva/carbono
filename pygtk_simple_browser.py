@@ -19,7 +19,7 @@ class SimpleBrowser:
         builder.connect_signals(self)
 
         self.window = builder.get_object("window")
-        self.window.set_size_request(1024,600)
+        self.window.set_size_request(1024,640)
         self.window.set_resizable(True)
         self.addressbar = builder.get_object("addressbar")
         self.refreshbutton = builder.get_object("refreshbutton")
