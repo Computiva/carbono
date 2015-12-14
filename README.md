@@ -10,10 +10,15 @@ Carbono
 	0. Install the redis database dependency.
 
 		>  # apt-get install redis-server
+
 	
 	0. If you don't have pip (python package manager), we recommend to install it.
 
 		>  # apt-get install python-pip
+
+    0. Need you installed python webkit 
+
+        >  # apt-get install python-webkit
 
 	0. Then install tornado web framework and redis client for python.
 		
