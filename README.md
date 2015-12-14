@@ -41,3 +41,7 @@ Carbono
 	0. Then load application from your web browser with address:
 
 		> http://localhost:8000/
+
+    0. Then load application from webapp:
+
+        > ./run-carbono.sh
