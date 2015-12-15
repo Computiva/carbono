@@ -5,6 +5,8 @@ Carbono
 
 	0. Manage market.
 
+![Carbono](https://scontent-mia1-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/10003051_939606849448321_5610226584802721035_n.png?oh=9c1849c499f0ef19048c25063a29bdc8&oe=57131148)
+
 0. INSTALLING
 
 	0. Install the redis database dependency.
