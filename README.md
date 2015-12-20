@@ -7,43 +7,29 @@ Carbono
 
 ![Carbono](https://scontent-mia1-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/10003051_939606849448321_5610226584802721035_n.png?oh=9c1849c499f0ef19048c25063a29bdc8&oe=57131148)
 
-0. INSTALLING
 
-	0. Install the redis database dependency.
+0. The program needs dependencies: 
 
-		>  # apt-get install redis-server
+> python-software-properties
 
-	
-	0. If you don't have pip (python package manager), we recommend to install it.
+> python-webkit
 
-		>  # apt-get install python-pip
+> redis-server
 
-    0. Install python webkit 
+> tornado redis
 
-        >  # apt-get install python-webkit
+Will be automatically installed with the installation script (INSTALL.sh)
 
-	0. Then install tornado web framework and redis client for python.
-		
-		>  # pip install tornado redis
 
-	0. Generate certificate to handle https requests.
+0. INSTALLING:
 
-		> $ ./gen_certificate.sh
 
-    0. Create admin account.
+> sudo apt-get install git
 
-        > $ python create_admin.py
+> git clone https://github.com/Computiva/carbono
 
-0. RUNNING
+> cd carbono/
 
-	0. Run the server.
+> chmod +x ./INSTALL.sh
 
-		> $ python server.py
-
-	0. Then load application from your web browser with address:
-
-		> http://localhost:8000/
-
-    0. Then load application from webapp:
-
-        > ./run-carbono.sh
+> ./INSTALL.sh
