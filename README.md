@@ -10,8 +10,6 @@ Carbono
 
 0. The program needs dependencies: 
 
-> python-software-properties
-
 > python-webkit
 
 > redis-server
