@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Carbono
+Version=Alpha
+GenericName=Carbono
+X-GNOME-FullName=Carbono
+Comment=Carbono
+Type=Application
+Categories=System;
+Path=/opt/carbono/
+Exec=gksudo ./run-carbono.sh
+Terminal=false
+StartupNotify=true
+Icon=/opt/carbono/www/images/products.png

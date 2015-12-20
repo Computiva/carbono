@@ -7,6 +7,11 @@ import time
 import re
 import os
 
+os.system("clear")
+os.system("echo The server is now connected...")
+#os.system("date >> logs.txt")
+os.system("date")
+
 from tornado.web import Application, authenticated, RequestHandler, StaticFileHandler
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
