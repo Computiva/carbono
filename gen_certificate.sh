@@ -13,7 +13,7 @@ sign_certificate() {
 }
 
 main() {
-	mkdir ./certificate
+	sudo mkdir ./certificate
 	gen_private_key
 	gen_certificate_request
 	sign_certificate
