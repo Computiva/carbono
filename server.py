@@ -9,7 +9,10 @@ import os
 
 os.system("clear")
 os.system("echo The server is now connected...")
+os.system("echo Do not close this terminal")
 #os.system("date >> logs.txt")
+os.system("echo") 
+
 os.system("date")
 
 from tornado.web import Application, authenticated, RequestHandler, StaticFileHandler
