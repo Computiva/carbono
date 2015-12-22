@@ -11,8 +11,10 @@ fieldset label {
 }
 
 fieldset#loginform {
-    width: 200px;
-    text-align: center;
+	position:absolute;
+    width: 100%;
+    left:-25%
+	
 }
 
 fieldset input[type=text], fieldset input[type=password] {
@@ -31,7 +33,7 @@ margin-left: 20px;
 
 div#page > div {
     position:absolute;
-    left:50%;
+    left:52%;
     top:55%;
 }
 
