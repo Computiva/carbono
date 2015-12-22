@@ -25,9 +25,10 @@ clear
 
 #generate certificate
 
-cd /opt/carbono
+cd /opt/carbono/
+#sudo rm -R certificate/
 sudo chmod +x gen_certificate.sh
-./gen_certificate.sh
+sudo ./gen_certificate.sh
 clear
 python create_admin.py
 
